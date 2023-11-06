@@ -26,7 +26,7 @@ var writeJson = exports.writeJson = function (response, arg1, arg2) {
     code = arg2;
   }
 
-  // Ensuring the responce code is a valid HTTP status code.
+  // Ensuring the response code is a valid HTTP status code.
   if (code < 100 || code >= 600) {
     code = 500; // Internal Server Error as a fallback.
   }
