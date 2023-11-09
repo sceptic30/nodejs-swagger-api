@@ -15,6 +15,7 @@
   "dependencies": {
     "connect": "*",
     "js-yaml": "",
-    "swagger-tools": "*"
+    "swagger-tools": "*",
+    "jsonwebtoken": "*"
   }
 }
