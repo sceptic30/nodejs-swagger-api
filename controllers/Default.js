@@ -1,7 +1,7 @@
 'use strict';
 
 var utils = require('../utils/writer.js');
-var Default = require('../service/DefaultService');
+var DefaultService = require('../service/DefaultService');
 var { generateToken, verifyToken } = require('../utils/tokenUtils'); // Import token functions
 
 module.exports = {
@@ -9,12 +9,12 @@ module.exports = {
     add: async function (req, res, next) {
       try {
         var person = req.swagger.params['person'].value;
-        // Assuming user authentication is successful
-        const user = { id: 123, username: 'exampleUser' }; // Replace with actual user data
-        const token = generateToken(user);
+        
+        // Generate a token directly (you might want to include additional data in the token)
+        const token = generateToken();
         person.token = token; // Add token to the person object
 
-        const response = await Default.people.add(person);
+        const response = await DefaultService.people.add(person);
         utils.writeJson(res, response);
       } catch (errorResponse) {
         utils.writeJson(res, errorResponse);
@@ -23,7 +23,7 @@ module.exports = {
 
     list: [verifyToken, async function (req, res, next) {
       try {
-        const response = await Default.people.list();
+        const response = await DefaultService.people.list();
         utils.writeJson(res, response);
       } catch (errorResponse) {
         utils.writeJson(res, errorResponse);
@@ -35,7 +35,7 @@ module.exports = {
     delete: [verifyToken, async function (req, res, next) {
       try {
         var uuid = req.swagger.params['uuid'].value;
-        const response = await Default.person.delete(uuid);
+        const response = await DefaultService.person.delete(uuid);
         utils.writeJson(res, response);
       } catch (errorResponse) {
         utils.writeJson(res, errorResponse);
@@ -45,7 +45,7 @@ module.exports = {
     get: [verifyToken, async function (req, res, next) {
       try {
         var uuid = req.swagger.params['uuid'].value;
-        const response = await Default.person.get(uuid);
+        const response = await DefaultService.person.get(uuid);
         utils.writeJson(res, response);
       } catch (errorResponse) {
         utils.writeJson(res, errorResponse);
@@ -56,7 +56,7 @@ module.exports = {
       try {
         var uuid = req.swagger.params['uuid'].value;
         var person = req.swagger.params['person'].value;
-        const response = await Default.person.update(uuid, person);
+        const response = await DefaultService.person.update(uuid, person);
         utils.writeJson(res, response);
       } catch (errorResponse) {
         utils.writeJson(res, errorResponse);

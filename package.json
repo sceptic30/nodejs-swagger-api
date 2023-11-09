@@ -16,6 +16,7 @@
     "connect": "*",
     "js-yaml": "",
     "swagger-tools": "*",
-    "jsonwebtoken": "*"
+    "jsonwebtoken": "*",
+    "pg": "*"
   }
 }
